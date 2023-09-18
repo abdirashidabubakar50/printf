@@ -7,8 +7,7 @@
  * @c: the character to be printed
  * Return: returns the character printed
  */
-int _putchar(char c)
-{
+int _putchar(char c){
 	return (write(1, &c, 1));
 }
 /**
@@ -16,16 +15,14 @@ int _putchar(char c)
  * @format: the format string
  * Return: the printed characters excludi9ng the null byte
  */
-int _printf(const char *format, ...)
-{
+int _printf(const char *format, ...){
 	char ch, *str,c;
 	int i, j, printed = 0;
 	va_list list;
 	if (!format)
 		return (-1);
 	va_start(list, format);
-	for (i = 0; format && format[i] != '\0'; i++)
-	{
+	for (i = 0; format && format[i] != '\0'; i++){
 		if (format[i] != '%'){
 			_putchar(format[i]);
 			printed++;
