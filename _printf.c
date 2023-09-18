@@ -20,11 +20,8 @@ int _printf(const char *format, ...)
 {
 	char ch;
 	int i, j, printed = 0;
-	
-	va_list list;
 
-	if (!format)
-		return -1;
+	va_list list;
 
 	va_start(list, format);
 
