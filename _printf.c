@@ -22,7 +22,7 @@ int _printf(const char *format, ...)
 	int i, j, printed = 0;
 
 	va_list list;
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+	if (format == NULL || format[0] == '\0' || (format[0] == '%' && format[1] == '\0'))
 		return (-1);
 	va_start(list, format);
 	for (i = 0; format && format[i] != '\0'; i++)
