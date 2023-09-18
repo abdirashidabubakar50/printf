@@ -57,6 +57,11 @@ int _printf(const char *format, ...)
 				_putchar(ch);
 				printed++;
 			}
+			else{
+				_putchar('%');
+				_putchar(ch);
+				printed += 2;
+			}
 		}
 	}
 	va_end(list);
