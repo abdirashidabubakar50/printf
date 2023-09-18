@@ -1,4 +1,4 @@
-#include <main.h>
+#include "main.h"
 #include <stdarg.h>
 #include <unistd.h>
 
@@ -19,41 +19,51 @@ int _putchar(char c)
 int _printf(const char *format, ...)
 {
 	char ch;
-	int i, printed = 0;
+	int i, j, printed = 0;
 
 	va_list list;
 
 	va_start(list, format);
 
-	for (i = 0, format && format[i] != '\0'; i++)
+	for (i = 0; format && format[i] != '\0'; i++)
 	{
 		if (format[i] != '%')
-			_putchar(*format);
+		{
+			_putchar(format[i]);
 			printed++;
-
+		}
 		else
 		{
-			*format++;
-			ch = *format;
+			i++;
+			ch = format[i];
 
-			if (ch == c)
+			if (ch == 'c')
+			{
 				char c = va_arg(list, int);
 
 				_putchar(c);
 				printed++;
+			}
+			else if (ch == 's')
+			{
+				char *str = va_arg(list, char *);
 
-			else if (ch == s)
-				char s = va_arg(list, *char);
-
-				for (i = 0; s[i] != '\0'; i++)
-					_putchar(s[i]);
-					printed++;
-
-			else if (ch == %)
+				if (str != NULL)
+				{
+					for (j = 0; str[j] != '\0'; j++)
+					{
+						_putchar(str[j]);
+						printed++;
+					}
+				}
+			}
+			else if (ch == '%')
+			{
 				_putchar(ch);
 				printed++;
+			}
 		}
 	}
-	va_end;
+	va_end(list);
 	return (printed);
 }
