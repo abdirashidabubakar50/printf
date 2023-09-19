@@ -1,7 +1,7 @@
 #include "main.h"
 #include <stdarg.h>
 #include <unistd.h>
-#include <stdio.h>
+
 /**
  * _putchar - helper function to create a character
  * @c: the character to be printed
@@ -18,40 +18,58 @@ int _putchar(char c)
  */
 int _printf(const char *format, ...)
 {
-	int count = 0, i;
-	char c, *s;
-	va_list args;
-	va_start(args, format);
+	char ch, *str,c;
+	int i, j, printed = 0;
 
-	for (i = 0; format[i] != '\0'; i++)
+	va_list list;
+	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
+		return (-1);
+	va_start(list, format);
+	for (i = 0; format && format[i] != '\0'; i++)
 	{
-		if (format[i] == '%')
+		if (format[i] != '%')
 		{
-			i++;
-			switch (format[i])
-			{
-				case 'c':
-					c = va_arg(args, int);
-					count += putchar(c);
-					break;
-				case 's':
-					s = va_arg(args, char *);
-					count += printf("%s", s);
-					break;
-					
-				case '%':
-					count += putchar('%');
-					break;
-					
-				default:
-					break;
-			}
+			_putchar(format[i]);
+			printed++;
 		}
 		else
 		{
-			count += putchar(format[i]);
+			i++;
+			ch = format[i];
+			if (ch == 'c'){
+				c = va_arg(list, int);
+				_putchar(c);
+				printed++;
+			}
+			else if (ch == 's')
+			{
+				str = va_arg(list, char *);
+				if (str == NULL)
+				{
+					va_end(list);
+					return (-1);
+				}
+				if (str != NULL){
+					for (j = 0; str[j] != '\0'; j++)
+					{
+						_putchar(str[j]);
+						printed++;
+					}
+				}
+			}
+			else if (ch == '%')
+			{
+				_putchar(ch);
+				printed++;
+			}
+			else
+			{
+				_putchar('%');
+				_putchar(ch);
+				printed += 2;
+			}
 		}
 	}
-	va_end(args);
-	return count;
+	va_end(list);
+	return (printed);
 }
