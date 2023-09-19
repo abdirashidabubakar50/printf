@@ -60,7 +60,7 @@ int _printf(const char *format, ...)
 			else{
 				_putchar('%');
 				_putchar(ch);
-				printed += 2;
+				printed += 1;
 			}
 		}
 	}
