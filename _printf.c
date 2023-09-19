@@ -44,6 +44,11 @@ int _printf(const char *format, ...)
 			else if (ch == 's')
 			{
 				str = va_arg(list, char *);
+				if (str == NULL)
+				{
+					va_end(list);
+					return (-1);
+				}
 				if (str != NULL){
 					for (j = 0; str[j] != '\0'; j++)
 					{
