@@ -57,10 +57,11 @@ int _printf(const char *format, ...)
 				_putchar(ch);
 				printed++;
 			}
-			else{
+			else
+			{
 				_putchar('%');
 				_putchar(ch);
-				printed += 1;
+				printed += 2;
 			}
 		}
 	}
