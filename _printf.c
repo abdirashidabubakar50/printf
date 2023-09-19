@@ -19,7 +19,7 @@ int _putchar(char c)
 int _printf(const char *format, ...)
 {
 	char ch, *str,c;
-	int i, j, printed = 0;
+	int i, j, printed = 0, numb, divisor, digit;
 
 	va_list list;
 	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
@@ -62,7 +62,29 @@ int _printf(const char *format, ...)
 				_putchar(ch);
 				printed++;
 			}
-			else
+			else if( ch == 'd' || ch == 'i')
+			{
+				numb = va_arg(list, int);
+				if (numb < 0)
+				{
+					_putchar('-');
+					printed++;
+					numb = -numb;
+				}
+				divisor = 1;
+				while(numb / divisor > 9)
+				{
+					divisor *= 10;
+				}
+				while (divisor != 0)
+				{
+					digit = numb / divisor;
+					_putchar(digit);
+					numb = numb % divisor;
+					divisor /= 10;
+				}
+			}
+			else 
 			{
 				_putchar('%');
 				_putchar(ch);
