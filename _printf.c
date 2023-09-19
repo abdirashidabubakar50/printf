@@ -80,6 +80,7 @@ int _printf(const char *format, ...)
 				{
 					digit = numb / divisor;
 					_putchar(digit);
+					printed++;
 					numb = numb % divisor;
 					divisor /= 10;
 				}
