@@ -79,7 +79,7 @@ int _printf(const char *format, ...)
 				while (divisor != 0)
 				{
 					digit = numb / divisor;
-					_putchar(digit);
+					_putchar(digit + '0');
 					printed++;
 					numb = numb % divisor;
 					divisor /= 10;
