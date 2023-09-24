@@ -1,21 +1,19 @@
 #include "main.h"
 #include <stdarg.h>
 #include <unistd.h>
-
 /**
- * _putchar - helper function to create a character
+ * _putchar - function that prints character to the ouput
  * @c: the character to be printed
  * Return: returns the character printed
- */
+*/
 int _putchar(char c)
 {
-	return (write(1, &c, 1));
-	return (write(1, &c, 1));
+	return(write(1, &c, 1));
 }
 /**
  * _printf - a function that works like print
  * @format: the format string
- * Return: the printed characters excludi9ng the null byte
+ * Return: the printed characters excluding the null byte
  */
 int _printf(const char *format, ...)
 {
@@ -84,6 +82,32 @@ int _printf(const char *format, ...)
 					printed++;
 					numb = numb % divisor;
 					divisor /= 10;
+				}
+			}
+			else if(ch == 'b')
+			{
+				int binary[8], i = 0;
+				unsigned int num;
+				num = va_arg(list, unsigned int);
+				if(num == 0)
+				{
+					_putchar('0');
+					printed++;
+				}
+				else
+				{
+					while( num > 0)
+					{
+						binary[i] = num % 2;
+						num = num / 2;
+						i++;
+					}
+					
+					for ( i = i -1; i >= 0; i--)
+					{
+						_putchar(binary[i] + '0');
+						printed++;
+					}
 				}
 			}
 			else 
